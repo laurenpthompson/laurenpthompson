@@ -1,0 +1,798 @@
+/* ==========================================================
+   Lauren Thompson — portfolio stylesheet
+   Direction: quiet gallery wall / viewfinder
+   A recurring thread in the work is looking through a frame
+   into someone else's space (windows, floor plans, seasons) —
+   the corner-bracket mark below is that motif, used sparingly
+   as the one signature device.
+   Palette:  gallery white, ink, muted stone, blueprint navy
+   Type:     Fraunces (display) + Athiti (body) + Inter (UI / labels)
+   ========================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Athiti:wght@400;500;600&family=Inter:wght@400;500;600&display=swap');
+
+:root {
+  --bg:        #FFFFFF;
+  --ink:       #16161A;
+  --stone:     #6E6D66;   /* muted grey for meta / captions */
+  --line:      #E6E4DD;   /* hairline rules */
+  --line-soft: #F1F0EA;
+  --navy:      #223A5E;   /* blueprint accent */
+  --paper:     #FAFAF8;   /* faint section wash */
+}
+
+* { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Athiti', sans-serif;
+  font-size: 1.05rem;
+  line-height: 1.75;
+  letter-spacing: 0;
+  color: var(--ink);
+  background: var(--bg);
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+.wrap {
+  max-width: 46rem;
+  margin: 0 auto;
+  padding: 0 1.75rem;
+}
+
+/* ---------- signature mark: viewfinder corners ---------- */
+
+.frame-mark {
+  display: inline-block;
+  width: 0.85rem;
+  height: 0.85rem;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.frame-mark::before,
+.frame-mark::after {
+  content: '';
+  position: absolute;
+  width: 0.5rem;
+  height: 0.5rem;
+  border: 1.5px solid var(--navy);
+}
+
+.frame-mark::before {
+  top: 0; left: 0;
+  border-right: none;
+  border-bottom: none;
+}
+
+.frame-mark::after {
+  bottom: 0; right: 0;
+  border-left: none;
+  border-top: none;
+}
+
+/* ---------- site nav (sticky, centered menu) ---------- */
+
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+}
+
+.site-nav .wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding-top: 1.1rem;
+  padding-bottom: 1.1rem;
+}
+
+.site-nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1.75rem;
+  margin: 0;
+  padding: 0;
+}
+
+.site-nav a {
+  text-decoration: none;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--stone);
+  padding-bottom: 0.2rem;
+  border-bottom: 1px solid transparent;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.site-nav a:hover,
+.site-nav a:focus-visible,
+.site-nav a[aria-current="page"] {
+  color: var(--ink);
+  border-color: var(--navy);
+}
+
+/* ---------- home hero (name header, home page only) ---------- */
+
+.home-hero {
+  text-align: center;
+  padding: 4.5rem 0 3rem;
+  border-bottom: none;
+}
+
+.home-hero .eyebrow {
+  justify-content: center;
+}
+
+.home-hero h1 {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-size: clamp(3rem, 8vw, 5.5rem);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  margin: 0 0 0.9rem;
+}
+
+.home-hero .role {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ---------- header ---------- */
+
+header {
+  padding: 4rem 0 3.5rem;
+  border-bottom: 1px solid var(--line);
+}
+
+header .eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--navy);
+  margin: 0 0 1.25rem;
+}
+
+header h1 {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-size: clamp(2.6rem, 7vw, 4rem);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  margin: 0 0 0.9rem;
+}
+
+header .role {
+  font-size: 1rem;
+  color: var(--stone);
+  margin: 0 0 2.5rem;
+  max-width: 34rem;
+}
+
+/* ---------- about (home page) ---------- */
+
+.about {
+  display: grid;
+  grid-template-columns: minmax(0, 21rem) 1fr;
+  gap: 3.5rem;
+  padding: 3.5rem 0 6rem;
+  border-top: 1px solid var(--line);
+  margin-top: 1rem;
+}
+
+.about-photo {
+  margin: 0;
+}
+
+.about-photo img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: 50% 30%;
+}
+
+.about-photo figcaption {
+  margin-top: 0.7rem;
+}
+
+.about-body h2 {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-size: 1.4rem;
+  margin: 0 0 1.5rem;
+}
+
+.about-body p {
+  max-width: 34rem;
+  color: var(--ink);
+  font-size: 1.02rem;
+  line-height: 1.8;
+  margin: 0 0 1.2rem;
+}
+
+.about-body p:last-of-type {
+  margin-bottom: 2rem;
+}
+
+.resume-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink);
+  border: 1px solid var(--ink);
+  padding: 0.85rem 1.4rem;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.resume-link:hover,
+.resume-link:focus-visible {
+  background: var(--ink);
+  color: #fff;
+}
+
+@media (max-width: 40rem) {
+  .about {
+    grid-template-columns: 1fr;
+    gap: 2.25rem;
+  }
+
+  .about-photo img {
+    aspect-ratio: 5 / 4;
+    object-position: 50% 25%;
+  }
+}
+
+/* ---------- index / on-page nav ---------- */
+
+.index {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--line);
+}
+
+.index li {
+  border-bottom: 1px solid var(--line);
+}
+
+.index a {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 0.9rem 0;
+  text-decoration: none;
+  color: var(--ink);
+  transition: color 0.15s ease, padding-left 0.15s ease;
+}
+
+.index a:hover,
+.index a:focus-visible {
+  color: var(--navy);
+  padding-left: 0.4rem;
+}
+
+.index .num {
+  font-family: 'Fraunces', serif;
+  font-size: 0.95rem;
+  color: var(--stone);
+  min-width: 1.4rem;
+}
+
+.index .title {
+  font-family: 'Fraunces', serif;
+  font-size: 1.05rem;
+  flex: 1;
+}
+
+.index .year {
+  font-size: 0.8rem;
+  color: var(--stone);
+  letter-spacing: 0.03em;
+}
+
+/* ---------- projects ---------- */
+
+main {
+  padding: 1rem 0 2rem;
+}
+
+.project {
+  position: relative;
+  padding: 5.5rem 0;
+  border-bottom: 1px solid var(--line);
+  scroll-margin-top: 4.5rem;
+}
+
+.project:last-child {
+  border-bottom: none;
+}
+
+.project .eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--navy);
+  margin: 0 0 1.25rem;
+}
+
+.project h2 {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-size: clamp(1.7rem, 3.6vw, 2.35rem);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  margin: 0 0 0.75rem;
+  max-width: 30rem;
+}
+
+.project h2 + .project-subhead {
+  margin-top: -0.5rem;
+}
+
+.project-subhead {
+  font-family: 'Athiti', sans-serif;
+  font-size: 1rem;
+  color: var(--stone);
+  margin: 0 0 1.25rem;
+}
+
+.project .meta {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  color: var(--stone);
+  letter-spacing: 0.01em;
+  margin: 0 0 3rem;
+}
+
+.project .annotated-text {
+  max-width: 38rem;
+}
+
+.project .annotated-text p {
+  margin: 0 0 1.2rem;
+  color: var(--ink);
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+.project .annotated-text p:last-child {
+  margin-bottom: 0;
+}
+
+/* ---------- abstract / read more ---------- */
+
+.abstract-block {
+  max-width: 38rem;
+}
+
+.annotated-text.collapsed p:first-child {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-bottom: 0;
+}
+
+.annotated-text.collapsed p:not(:first-child) {
+  display: none;
+}
+
+.read-more-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 1rem;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--navy);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.15s ease;
+}
+
+.read-more-btn:hover,
+.read-more-btn:focus-visible {
+  border-color: var(--navy);
+}
+
+/* ---------- media ---------- */
+
+figure {
+  margin: 2.5rem 0;
+}
+
+img, video {
+  max-width: 100%;
+  display: block;
+  width: 100%;
+  height: auto;
+  background: var(--paper);
+}
+
+figcaption {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--stone);
+  margin-top: 0.7rem;
+}
+
+/* ---------- before / after + floor plan ---------- */
+
+.before-after,
+.floor-plans {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  margin: 2.5rem 0;
+}
+
+.before-after figure,
+.floor-plans figure {
+  margin: 0;
+}
+
+.before-after figcaption {
+  color: var(--navy);
+}
+
+@media (max-width: 36rem) {
+  .before-after,
+  .floor-plans {
+    grid-template-columns: 1fr;
+  }
+}
+
+.floor-plan-single {
+  margin: 2.5rem 0;
+  max-width: 30rem;
+}
+
+.floor-plan-single figcaption {
+  color: var(--navy);
+}
+
+/* ---------- slideshow ---------- */
+
+.slideshow {
+  position: relative;
+  margin: 2.5rem 0;
+}
+
+.slideshow .slides {
+  position: relative;
+  background: var(--paper);
+}
+
+.slideshow .slide {
+  display: none;
+  width: 100%;
+}
+
+.slideshow .slide.active {
+  display: block;
+}
+
+.slide-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid var(--line);
+  border-radius: 0;
+  color: var(--ink);
+  width: 2.25rem;
+  height: 2.25rem;
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.slide-btn:hover {
+  background: var(--navy);
+  color: #fff;
+  border-color: var(--navy);
+}
+
+.slide-btn.prev { left: 0.75rem; }
+.slide-btn.next { right: 0.75rem; }
+
+.slide-dots {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 1rem;
+}
+
+.slide-dots .dot {
+  width: 1rem;
+  height: 2px;
+  border: none;
+  background: var(--line);
+  padding: 0;
+  cursor: pointer;
+  transition: background 0.15s ease, width 0.15s ease;
+}
+
+.slide-dots .dot.active {
+  background: var(--navy);
+  width: 1.6rem;
+}
+
+/* ---------- mov row + image row (Stranger project) ---------- */
+
+.mov-row,
+.image-row {
+  display: grid;
+  gap: 1.25rem;
+  margin: 2.5rem 0;
+}
+
+.mov-row {
+  grid-template-columns: 1fr 1fr;
+}
+
+.image-row {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.mov-row figure,
+.image-row figure {
+  margin: 0;
+}
+
+.mov-row video {
+  width: 100%;
+}
+
+@media (max-width: 36rem) {
+  .mov-row,
+  .image-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- video feature (single large centered video) ---------- */
+
+.video-feature {
+  max-width: 34rem;
+  margin: 2.5rem auto;
+  text-align: center;
+}
+
+.video-feature video {
+  width: 100%;
+  display: block;
+  background: var(--paper);
+}
+
+.video-feature figcaption {
+  text-align: center;
+}
+
+/* ---------- video filmstrip (horizontal scroll, within page margins) ---------- */
+
+.video-filmstrip {
+  display: flex;
+  gap: 0.6rem;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  margin: 2.5rem 0;
+  padding-bottom: 0.4rem;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line) transparent;
+}
+
+.video-filmstrip::-webkit-scrollbar {
+  height: 5px;
+}
+
+.video-filmstrip::-webkit-scrollbar-thumb {
+  background: var(--line);
+}
+
+.video-filmstrip::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.video-filmstrip figure {
+  flex: 0 0 auto;
+  width: 180px;
+  margin: 0;
+  scroll-snap-align: start;
+}
+
+.video-filmstrip video {
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  background: var(--paper);
+  display: block;
+}
+
+.video-filmstrip figcaption {
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+@media (max-width: 36rem) {
+  .video-filmstrip figure {
+    width: 130px;
+  }
+
+  .video-filmstrip video {
+    width: 130px;
+    height: 130px;
+  }
+}
+
+/* ---------- sub-section (project group header, e.g. Furniture Design) ---------- */
+
+.subsection-intro {
+  max-width: 34rem;
+  margin: 0 0 3rem;
+}
+
+.subsection-intro h3 {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-size: 1.3rem;
+  margin: 0 0 0.6rem;
+}
+
+.subsection-intro p {
+  color: var(--stone);
+  font-size: 0.92rem;
+  margin: 0;
+}
+
+/* ---------- furniture pieces ---------- */
+
+.piece {
+  margin: 0 0 3.75rem;
+}
+
+.piece:last-child {
+  margin-bottom: 0;
+}
+
+.piece-heading {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin: 0 0 0.35rem;
+  flex-wrap: wrap;
+}
+
+.piece-heading h4 {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-size: 1.15rem;
+  margin: 0;
+}
+
+.piece-tag {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--navy);
+  border: 1px solid var(--line);
+  padding: 0.15rem 0.5rem;
+}
+
+.piece-note {
+  color: var(--stone);
+  font-size: 0.92rem;
+  max-width: 34rem;
+  margin: 0 0 1.5rem;
+}
+
+.piece-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin: 0;
+}
+
+.piece-grid figure {
+  margin: 0;
+}
+
+@media (max-width: 36rem) {
+  .piece-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- misc / coursework grid ---------- */
+
+.misc-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+  margin: 0 0 1rem;
+}
+
+.misc-grid img {
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  background: var(--paper);
+}
+
+@media (max-width: 30rem) {
+  .misc-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ---------- footer ---------- */
+
+footer {
+  padding: 3.5rem 0 4rem;
+  font-size: 0.82rem;
+  color: var(--stone);
+  text-align: center;
+}
+
+/* ---------- links ---------- */
+
+a {
+  color: var(--navy);
+}
+
+/* ---------- focus visibility (accessibility) ---------- */
+
+a:focus-visible,
+img:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--navy);
+  outline-offset: 2px;
+}
