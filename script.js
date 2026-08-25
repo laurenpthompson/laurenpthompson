@@ -1,22 +1,42 @@
 (function () {
-  var PIXELS_PER_SECOND = 32; // scroll speed for the news reels
+  function initSlideshow(root) {
+    var slides = root.querySelectorAll('.slide');
+    var dotsContainer = root.querySelector('.slide-dots');
+    var caption = root.querySelector('figcaption');
+    var prevBtn = root.querySelector('.prev');
+    var nextBtn = root.querySelector('.next');
+    var current = 0;
 
-  function initReel(root) {
-    var track = root.querySelector('.reel-track');
-    if (!track) return;
+    slides.forEach(function (slide, i) {
+      var dot = document.createElement('button');
+      dot.type = 'button';
+      dot.className = 'dot' + (i === 0 ? ' active' : '');
+      dot.setAttribute('aria-label', 'Go to image ' + (i + 1));
+      dotsContainer.appendChild(dot);
+    });
+    var dots = root.querySelectorAll('.dot');
 
-    var items = Array.prototype.slice.call(track.children);
-    if (items.length === 0) return;
+    function goTo(index) {
+      slides[current].classList.remove('active');
+      dots[current].classList.remove('active');
+      current = (index + slides.length) % slides.length;
+      slides[current].classList.add('active');
+      dots[current].classList.add('active');
+      caption.textContent = slides[current].getAttribute('data-caption');
+    }
 
-    // Duplicate the set once so the strip can loop seamlessly.
-    items.forEach(function (item) {
-      track.appendChild(item.cloneNode(true));
+    prevBtn.addEventListener('click', function () { goTo(current - 1); });
+    nextBtn.addEventListener('click', function () { goTo(current + 1); });
+    dots.forEach(function (dot, i) {
+      dot.addEventListener('click', function () { goTo(i); });
     });
 
-    var singleSetWidth = track.scrollWidth / 2;
-    var duration = singleSetWidth / PIXELS_PER_SECOND;
-    track.style.animationDuration = duration + 's';
+    root.setAttribute('tabindex', '0');
+    root.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowLeft') goTo(current - 1);
+      if (e.key === 'ArrowRight') goTo(current + 1);
+    });
   }
 
-  document.querySelectorAll('.reel').forEach(initReel);
+  document.querySelectorAll('.slideshow').forEach(initSlideshow);
 })();

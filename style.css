@@ -456,72 +456,76 @@ figcaption {
   color: var(--navy);
 }
 
-/* ---------- news reel (auto-scrolling filmstrip) ---------- */
+/* ---------- slideshow ---------- */
 
-.reel {
+.slideshow {
   position: relative;
   margin: 2.5rem 0;
-  overflow: hidden;
-  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 2.5rem, #000 calc(100% - 2.5rem), transparent 100%);
-  mask-image: linear-gradient(to right, transparent 0, #000 2.5rem, #000 calc(100% - 2.5rem), transparent 100%);
 }
 
-.reel-track {
-  display: flex;
-  align-items: flex-start;
-  gap: 1rem;
-  width: max-content;
-  animation: reel-scroll 40s linear infinite;
-}
-
-.reel:hover .reel-track,
-.reel:focus-within .reel-track {
-  animation-play-state: paused;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .reel-track {
-    animation: none;
-  }
-}
-
-@keyframes reel-scroll {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-
-.reel-track figure {
-  flex: 0 0 auto;
-  margin: 0;
-  width: 220px;
-}
-
-.reel-track img,
-.reel-track video {
-  width: 220px;
-  height: 220px;
-  object-fit: cover;
+.slideshow .slides {
+  position: relative;
   background: var(--paper);
+}
+
+.slideshow .slide {
+  display: none;
+  width: 100%;
+}
+
+.slideshow .slide.active {
   display: block;
 }
 
-.reel-track figcaption {
-  text-align: center;
-  margin-top: 0.5rem;
-  font-size: 0.82rem;
-  color: var(--stone);
+.slide-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid var(--line);
+  border-radius: 0;
+  color: var(--ink);
+  width: 2.25rem;
+  height: 2.25rem;
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s ease, border-color 0.15s ease;
 }
 
-@media (max-width: 36rem) {
-  .reel-track figure,
-  .reel-track img,
-  .reel-track video {
-    width: 150px;
-  }
+.slide-btn:hover {
+  background: var(--navy);
+  color: #fff;
+  border-color: var(--navy);
+}
 
-  .reel-track video {
-    height: 150px;
-  }
+.slide-btn.prev { left: 0.75rem; }
+.slide-btn.next { right: 0.75rem; }
+
+.slide-dots {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 1rem;
+}
+
+.slide-dots .dot {
+  width: 1rem;
+  height: 2px;
+  border: none;
+  background: var(--line);
+  padding: 0;
+  cursor: pointer;
+  transition: background 0.15s ease, width 0.15s ease;
+}
+
+.slide-dots .dot.active {
+  background: var(--navy);
+  width: 1.6rem;
 }
 
 /* ---------- mov row + image row (Stranger project) ---------- */
@@ -573,6 +577,63 @@ figcaption {
 
 .video-feature figcaption {
   text-align: center;
+}
+
+/* ---------- video filmstrip (horizontal scroll, within page margins) ---------- */
+
+.video-filmstrip {
+  display: flex;
+  gap: 0.6rem;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  margin: 2.5rem 0;
+  padding-bottom: 0.4rem;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line) transparent;
+}
+
+.video-filmstrip::-webkit-scrollbar {
+  height: 5px;
+}
+
+.video-filmstrip::-webkit-scrollbar-thumb {
+  background: var(--line);
+}
+
+.video-filmstrip::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.video-filmstrip figure {
+  flex: 0 0 auto;
+  width: 180px;
+  margin: 0;
+  scroll-snap-align: start;
+}
+
+.video-filmstrip video {
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  background: var(--paper);
+  display: block;
+}
+
+.video-filmstrip figcaption {
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+@media (max-width: 36rem) {
+  .video-filmstrip figure {
+    width: 130px;
+  }
+
+  .video-filmstrip video {
+    width: 130px;
+    height: 130px;
+  }
 }
 
 /* ---------- sub-section (project group header, e.g. Furniture Design) ---------- */
