@@ -203,6 +203,12 @@ header .role {
   margin: 0;
 }
 
+.about-media {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
 .about-photo img {
   width: 100%;
   aspect-ratio: 4 / 5;
@@ -212,6 +218,13 @@ header .role {
 
 .about-photo figcaption {
   margin-top: 0.7rem;
+}
+
+.about-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
 }
 
 .about-body h2 {
@@ -226,17 +239,15 @@ header .role {
   color: var(--ink);
   font-size: 1.02rem;
   line-height: 1.8;
-  margin: 0 0 1.2rem;
-}
-
-.about-body p:last-of-type {
-  margin-bottom: 2rem;
+  margin: 0;
 }
 
 .resume-link {
-  display: inline-flex;
+  display: flex;
   align-items: center;
+  justify-content: center;
   gap: 0.6rem;
+  width: 100%;
   text-decoration: none;
   font-family: 'Inter', sans-serif;
   font-weight: 600;
@@ -265,6 +276,11 @@ header .role {
     aspect-ratio: 5 / 4;
     object-position: 50% 25%;
   }
+
+  .about-body {
+    height: auto;
+    gap: 1.2rem;
+  }
 }
 
 /* ---------- index / on-page nav ---------- */
@@ -273,48 +289,58 @@ header .role {
   list-style: none;
   margin: 0;
   padding: 0;
-  display: flex;
-  flex-direction: column;
-  border-top: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
 }
 
 .index li {
-  border-bottom: 1px solid var(--line);
+  margin: 0;
 }
 
 .index a {
   display: flex;
-  align-items: baseline;
-  gap: 1rem;
-  padding: 0.9rem 0;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.5rem;
+  height: 100%;
+  min-height: 7rem;
+  padding: 1.5rem;
   text-decoration: none;
   color: var(--ink);
-  transition: color 0.15s ease, padding-left 0.15s ease;
+  border: 1.5px solid var(--navy);
+  transition: background 0.15s ease, color 0.15s ease;
 }
 
 .index a:hover,
 .index a:focus-visible {
-  color: var(--navy);
-  padding-left: 0.4rem;
+  background: var(--navy);
+  color: #fff;
 }
 
-.index .num {
-  font-family: 'Fraunces', serif;
-  font-size: 0.95rem;
-  color: var(--stone);
-  min-width: 1.4rem;
+.index a:hover .year,
+.index a:focus-visible .year {
+  color: rgba(255, 255, 255, 0.72);
 }
 
 .index .title {
   font-family: 'Fraunces', serif;
   font-size: 1.05rem;
-  flex: 1;
+  line-height: 1.3;
 }
 
 .index .year {
   font-size: 0.8rem;
   color: var(--stone);
   letter-spacing: 0.03em;
+  transition: color 0.15s ease;
+}
+
+@media (max-width: 30rem) {
+  .index {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* ---------- projects ---------- */
