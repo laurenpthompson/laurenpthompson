@@ -39,4 +39,49 @@
   }
 
   document.querySelectorAll('.slideshow').forEach(initSlideshow);
+
+  function initLightbox() {
+    var lightbox = document.getElementById('lightbox');
+    if (!lightbox) return;
+
+    var img = lightbox.querySelector('img');
+    var closeBtn = lightbox.querySelector('.lightbox-close');
+    var lastFocused = null;
+
+    function open(src, alt) {
+      lastFocused = document.activeElement;
+      img.src = src;
+      img.alt = alt || '';
+      lightbox.classList.add('open');
+      lightbox.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      closeBtn.focus();
+    }
+
+    function close() {
+      lightbox.classList.remove('open');
+      lightbox.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      img.src = '';
+      if (lastFocused) lastFocused.focus();
+    }
+
+    document.querySelectorAll('.view-larger').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        open(btn.getAttribute('data-full'), btn.getAttribute('data-alt'));
+      });
+    });
+
+    closeBtn.addEventListener('click', close);
+
+    lightbox.addEventListener('click', function (e) {
+      if (e.target === lightbox) close();
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && lightbox.classList.contains('open')) close();
+    });
+  }
+
+  initLightbox();
 })();
