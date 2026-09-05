@@ -113,6 +113,11 @@ body {
   .site-nav ul {
     gap: 1.25rem;
   }
+
+  .home-hero {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
 }
 
 .site-nav a {
@@ -139,7 +144,8 @@ body {
 
 .home-hero {
   text-align: center;
-  padding: 4.5rem 0 3rem;
+  padding-top: 4.5rem;
+  padding-bottom: 3rem;
   border-bottom: none;
 }
 
