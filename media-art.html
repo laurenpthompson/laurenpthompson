@@ -5,6 +5,9 @@
 
   <title>Media &amp; Art Design ~ Lauren Thompson</title>
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Athiti:wght@400;500;600&family=Inter:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="./style.css">
 </head>
 <body>
@@ -38,7 +41,7 @@
 
     <!-- CAPTION: edit the text inside <figcaption>...</figcaption> below. -->
     <figure class="video-feature">
-      <video controls muted>
+      <video controls muted preload="metadata">
         <source src="./media/thompson_stranger_00.mp4">
       </video>
       <figcaption>Installation footage</figcaption>
@@ -47,17 +50,17 @@
     <!-- CAPTIONS: edit the text inside each <figcaption>...</figcaption> below. -->
     <div class="image-row">
       <figure>
-        <img src="./media/thompson_stranger_03.JPG" alt="Suspended cube, projection mapped, view 1">
+        <img src="./media/thompson_stranger_03.JPG" alt="Suspended cube, projection mapped, view 1" loading="lazy" decoding="async">
         <figcaption>Front View</figcaption>
       </figure>
 
       <figure>
-        <img src="./media/thompson_stranger_02.jpeg" alt="Suspended cube, projection mapped, view 2">
+        <img src="./media/thompson_stranger_02.jpeg" alt="Suspended cube, projection mapped, view 2" loading="lazy" decoding="async">
         <figcaption>Projection Canvas</figcaption>
       </figure>
 
       <figure>
-        <img src="./media/thompson_stranger_05.jpg" alt="Suspended cube, projection mapped, view 3">
+        <img src="./media/thompson_stranger_05.jpg" alt="Suspended cube, projection mapped, view 3" loading="lazy" decoding="async">
         <figcaption>Back View</figcaption>
       </figure>
     </div>
@@ -65,39 +68,39 @@
     <!-- CAPTIONS: edit the text inside each <figcaption>...</figcaption> below. -->
     <div class="video-filmstrip">
       <figure>
-        <video controls muted playsinline><source src="./media/thompson_stranger_17.mp4"></video>
+        <video controls muted playsinline preload="none"><source src="./media/thompson_stranger_17.mp4"></video>
         <figcaption>Clip 1</figcaption>
       </figure>
       <figure>
-        <video controls muted playsinline><source src="./media/thompson_stranger_18.mp4"></video>
+        <video controls muted playsinline preload="none"><source src="./media/thompson_stranger_18.mp4"></video>
         <figcaption>Clip 2</figcaption>
       </figure>
       <figure>
-        <video controls muted playsinline><source src="./media/thompson_stranger_19.mp4"></video>
+        <video controls muted playsinline preload="none"><source src="./media/thompson_stranger_19.mp4"></video>
         <figcaption>Clip 3</figcaption>
       </figure>
       <figure>
-        <video controls muted playsinline><source src="./media/thompson_stranger_20.mp4"></video>
+        <video controls muted playsinline preload="none"><source src="./media/thompson_stranger_20.mp4"></video>
         <figcaption>Clip 4</figcaption>
       </figure>
       <figure>
-        <video controls muted playsinline><source src="./media/thompson_stranger_21.mp4"></video>
+        <video controls muted playsinline preload="none"><source src="./media/thompson_stranger_21.mp4"></video>
         <figcaption>Clip 5</figcaption>
       </figure>
       <figure>
-        <video controls muted playsinline><source src="./media/thompson_stranger_22.mp4"></video>
+        <video controls muted playsinline preload="none"><source src="./media/thompson_stranger_22.mp4"></video>
         <figcaption>Clip 6</figcaption>
       </figure>
       <figure>
-        <video controls muted playsinline><source src="./media/thompson_stranger_23.mp4"></video>
+        <video controls muted playsinline preload="none"><source src="./media/thompson_stranger_23.mp4"></video>
         <figcaption>Clip 7</figcaption>
       </figure>
       <figure>
-        <video controls muted playsinline><source src="./media/thompson_stranger_24.mp4"></video>
+        <video controls muted playsinline preload="none"><source src="./media/thompson_stranger_24.mp4"></video>
         <figcaption>Clip 8</figcaption>
       </figure>
       <figure>
-        <video controls muted playsinline><source src="./media/thompson_stranger_25.mp4"></video>
+        <video controls muted playsinline preload="none"><source src="./media/thompson_stranger_25.mp4"></video>
         <figcaption>Clip 9</figcaption>
       </figure>
     </div>
@@ -122,7 +125,7 @@
 
     <!-- CAPTION: edit the text inside <figcaption>...</figcaption> below. -->
     <figure>
-      <img src="./media/thompson_seasoned_01.jpeg" alt="Seasoned XR world, in progress">
+      <img src="./media/thompson_seasoned_01.jpeg" alt="Seasoned XR world, in progress" loading="lazy" decoding="async">
       <figcaption>Project in progress</figcaption>
     </figure>
     <div class="abstract-block">
@@ -139,6 +142,6 @@
   <p>Lauren Thompson &nbsp;&middot;&nbsp; lpt@thompso.net &nbsp;&middot;&nbsp; 2026</p>
 </footer>
 
-<script src="./script.js"></script>
+<script src="./script.js" defer></script>
 
 </body></html>
