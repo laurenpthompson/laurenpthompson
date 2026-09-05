@@ -1,40 +1,73 @@
 (function () {
   function initSlideshow(root) {
-    var slides = root.querySelectorAll('.slide');
+    var slides = Array.prototype.slice.call(root.querySelectorAll('.slide'));
     var dotsContainer = root.querySelector('.slide-dots');
     var caption = root.querySelector('figcaption');
     var prevBtn = root.querySelector('.prev');
     var nextBtn = root.querySelector('.next');
     var current = 0;
+    var animating = false;
 
     slides.forEach(function (slide, i) {
+      if (slide.classList.contains('active')) current = i;
+
       var dot = document.createElement('button');
       dot.type = 'button';
-      dot.className = 'dot' + (i === 0 ? ' active' : '');
+      dot.className = 'dot' + (i === current ? ' active' : '');
       dot.setAttribute('aria-label', 'Go to image ' + (i + 1));
       dotsContainer.appendChild(dot);
     });
     var dots = root.querySelectorAll('.dot');
 
-    function goTo(index) {
-      slides[current].classList.remove('active');
+    function goTo(index, direction) {
+      var nextIndex = (index + slides.length) % slides.length;
+      if (nextIndex === current || animating) return;
+      if (direction === undefined) direction = nextIndex > current ? 1 : -1;
+      animating = true;
+
+      var outgoing = slides[current];
+      var incoming = slides[nextIndex];
+
+      // Place the incoming slide just off-screen on the side it should enter from
+      incoming.style.transition = 'none';
+      incoming.style.transform = 'translateX(' + (direction * 100) + '%)';
+      incoming.classList.add('active');
+      void incoming.offsetWidth; // force reflow so the starting position registers
+      incoming.style.transition = '';
+
+      requestAnimationFrame(function () {
+        incoming.style.transform = 'translateX(0)';
+        outgoing.style.transform = 'translateX(' + (-direction * 100) + '%)';
+      });
+
+      function cleanup() {
+        outgoing.classList.remove('active');
+        outgoing.style.transition = 'none';
+        outgoing.style.transform = '';
+        void outgoing.offsetWidth;
+        outgoing.style.transition = '';
+        incoming.style.transform = '';
+        outgoing.removeEventListener('transitionend', cleanup);
+        animating = false;
+      }
+      outgoing.addEventListener('transitionend', cleanup);
+
       dots[current].classList.remove('active');
-      current = (index + slides.length) % slides.length;
-      slides[current].classList.add('active');
-      dots[current].classList.add('active');
-      caption.textContent = slides[current].getAttribute('data-caption');
+      dots[nextIndex].classList.add('active');
+      caption.textContent = incoming.getAttribute('data-caption');
+      current = nextIndex;
     }
 
-    prevBtn.addEventListener('click', function () { goTo(current - 1); });
-    nextBtn.addEventListener('click', function () { goTo(current + 1); });
+    prevBtn.addEventListener('click', function () { goTo(current - 1, -1); });
+    nextBtn.addEventListener('click', function () { goTo(current + 1, 1); });
     dots.forEach(function (dot, i) {
       dot.addEventListener('click', function () { goTo(i); });
     });
 
     root.setAttribute('tabindex', '0');
     root.addEventListener('keydown', function (e) {
-      if (e.key === 'ArrowLeft') goTo(current - 1);
-      if (e.key === 'ArrowRight') goTo(current + 1);
+      if (e.key === 'ArrowLeft') goTo(current - 1, -1);
+      if (e.key === 'ArrowRight') goTo(current + 1, 1);
     });
   }
 
